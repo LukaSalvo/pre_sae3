@@ -1,7 +1,10 @@
 #!/usr/bin/env ruby
 
-puts "Processus boucle infini lancé (PID #{Process.pid})"
+puts "=== Simulation: Surcharge CPU (Boucle Infinie) ==="
+puts "PID: #{Process.pid}"
+puts "Appuyez sur Ctrl+C pour arrêter."
+
 
 loop do
-  Math.sin(rand(1..10000))
+  # Rien, juste consommer des cycles
 end
