@@ -152,3 +152,6 @@ La démarche de diagnostic suivie repose sur les étapes suivantes :
 5. Corrélation des informations avec le contexte système
 
 Cette méthodologie permet d’identifier efficacement les causes profondes de comportements anormaux des processus sous Linux.
+
+
+TEst 
