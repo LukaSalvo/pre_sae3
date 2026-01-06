@@ -321,4 +321,3 @@ cat /proc/<PID>/io
 5. **Être prudent** avec strace en production (overhead)
 
 
-sermacora@cesi.fr
