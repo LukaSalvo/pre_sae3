@@ -319,3 +319,6 @@ cat /proc/<PID>/io
 3. **Sauvegarder** les traces pour analyse ultérieure
 4. **Corréler** plusieurs sources d'information
 5. **Être prudent** avec strace en production (overhead)
+
+
+sermacora@cesi.fr
