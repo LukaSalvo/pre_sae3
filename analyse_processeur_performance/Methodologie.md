@@ -1,4 +1,4 @@
-# Documentation - Analyse de Processus et Performances
+# Documentation - Analyse de processus et performances
 
 ## Scénarios de test créés
 
@@ -309,15 +309,3 @@ cat /proc/<PID>/io
 - **Z (Zombie)**: Terminé mais pas encore nettoyé par le parent
 - **T (Stopped)**: Arrêté (SIGSTOP, SIGTSTP)
 - **t (Tracing stop)**: Arrêté par le debugger
-
----
-
-## Bonnes pratiques
-
-1. **Toujours** vérifier les permissions (sudo si nécessaire)
-2. **Documenter** les PIDs et timestamps
-3. **Sauvegarder** les traces pour analyse ultérieure
-4. **Corréler** plusieurs sources d'information
-5. **Être prudent** avec strace en production (overhead)
-
-
