@@ -1,17 +1,17 @@
 #!/usr/bin/env ruby
 require 'socket'
 
-puts "=== Audit Réseau Automatisé (Ruby) ==="
+puts "Audit réseau automatisé (Ruby)"
 puts "Date: #{Time.now}"
 puts ""
 
-puts "--- 1. Services exposés (Ports en écoute) ---"
+puts "1. Services exposés (Ports en écoute)"
 # Using system call and reading output
 puts `ss -tulnp | head -n 20`
 puts "..."
 puts ""
 
-puts "--- 2. Connexions suspectes (établies) ---"
+puts "2. Connexions suspectes (établies)"
 connections = `ss -tun state established`
 suspicious = connections.lines.select do |line|
   !line.match(/:80 |:443 |:22 /) && !line.start_with?("Netid")
@@ -24,7 +24,7 @@ else
 end
 puts ""
 
-puts "--- 3. Configuration Réseau ---"
+puts "3. Configuration réseau"
 puts "Interfaces :"
 puts `ip -br addr`
 puts ""
@@ -38,4 +38,4 @@ end
 
 
 puts ""
-puts "=== Fin de l'audit ==="
+puts "Fin de l'audit"

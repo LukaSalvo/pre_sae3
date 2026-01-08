@@ -2,7 +2,7 @@
 
 Ce document présente la méthodologie de diagnostic pour différents problèmes réseau.
 
-## 1. Latence Réseau (`latence_eleve.sh`)
+## 1. Latence réseau (`latence_eleve.sh`)
 
 **Symptôme :** Lenteur d'accès, ping élevé.
 
@@ -18,7 +18,7 @@ Ce document présente la méthodologie de diagnostic pour différents problèmes
     ```
     *Interprétation :* Identifier le saut (hop) où la latence augmente brusquement.
 
-## 2. Pare-Feu Bloquant (`scenario_parefeu.rb`)
+## 2. Pare-feu bloquant (`scenario_parefeu.rb`)
 
 **Symptôme :** Impossible d'accéder à un service (ex: port 80), le navigateur charge indéfiniment ou `curl` timeout.
 
@@ -62,7 +62,7 @@ Ce document présente la méthodologie de diagnostic pour différents problèmes
     ```
     *Interprétation :* Vérifier les IP des `nameserver`.
 
-## Outils Référence
+## Outils référence
 
 Voici les outils à maîtriser pour le projet :
 

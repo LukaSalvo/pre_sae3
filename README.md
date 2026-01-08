@@ -1,44 +1,48 @@
-# SAE 3 - Analyse Forensique et Débogage Système
+# Synthèse du projet - SAE 3 : Analyse forensique et débogage
 
-Ce dépôt contient les ressources pour la SAE 3 "Analyse forensique et débogage système".
+Ce projet regroupe une suite d'outils et d'analyses pour le diagnostic système, réseau et forensique sous Linux. Il est structuré en 5 parties distinctes, allant de l'analyse bas niveau à l'automatisation complète via Docker.
 
-## Structure du Projet
+## Structure globale
 
-- `analyse_processeur_performance/` : Partie 1 (Analyse processus et performances)
-- `diagnostique_reseau/` : Partie 2 (Diagnostic réseau)
+### 📂 P1_analyse_processeur_performance
+*Focus : Compréhension des processus et de l'usage CPU/RAM.*
 
-## Partie 2 : Diagnostic Réseau
+- **`boucle_infinie.rb`** : Script simulant une charge CPU bloquante (100% usage) pour tester les outils de monitoring (`top`, `htop`).
+- **`fuite_memoire.rb`** : Script allouant de la RAM sans libération pour simuler une fuite mémoire et tester la détection OOM (Out of Memory).
+- **`blocage_IO.rb`** : Script générant des écritures disques intensives pour bloquer les I/O et tester l'état de processus "D" (Disk Sleep).
+- **`rapport_analyse.rb`** : Outil en Ruby qui inspecte le système (`/proc`) pour sortir un rapport détaillé sur l'état des processus.
+- **`rapport_analyse_proc.md`** : Documentation méthodologique expliquant comment diagnostiquer ces anomalies manuellement.
 
-Cette partie contient des outils et scénarios pour diagnostiquer des problèmes réseaux, implémentés en **Ruby**.
+### 📂 P2_diagnostique_reseau
+*Focus : Audit et dépannage de la connectivité réseau.*
 
-### Prérequis
-- Ruby interactif (`irb`, `ruby`)
-- Droits `sudo` pour les scénarios de panne (manipulation `iptables`, `tc`).
-- Outils systèmes : `ss`, `ip`, `tc`, `iptables`.
+- **`audit_reseau.rb`** : Scanner automatisé qui liste les ports ouverts, détecte les connexions suspectes hors standards (Web/SSH) et affiche la config IP/Routes.
+- **`latence_eleve.rb`** : Outil utilisant `tc` (Traffic Control) pour injecter artificiellement de la latence (ping élevé) sur l'interface réseau.
+- **`scenario_parefeu.rb`** : Simule un blocage de port (ex: 80) via `iptables` pour tester les diagnostics de connectivité.
+- **`scenario_dns_casse.rb`** : Modifie temporairement `/etc/resolv.conf` pour simuler une panne de résolution de noms.
+- **`rapport_diagnostic_guide.md`** : Guide complet des commandes (`ping`, `mtr`, `ss`, `dig`) pour résoudre ces incidents.
 
-### Outils Disponibles
+### 📂 P3_diagnostic_log
+*Focus : Investigation post-incident et analyse de logs.*
 
-Tous les scripts se trouvent dans le dossier `diagnostique_reseau/`.
+- **`scenario_intrusion_ssh.sh`** : Génère des tentatives de connexion SSH échouées en masse pour "polluer" les logs d'authentification (`auth.log`).
+- **`scenario_saturation_disque.sh`** : Remplit un espace disque temporaire pour provoquer et logger des erreurs "No space left on device".
+- **`analyse_log.sh`** : Script Bash utilisant `grep`, `awk` et `journalctl` pour extraire automatiquement les traces suspectes (Auth failed, erreurs noyau).
+- **`rapport_investigation_forensique.md`** : Rapport type expliquant la méthodologie d'enquête sur les deux scénarios ci-dessus.
 
-1.  **Audit Automatisé**
-    *   Fichier : `audit_reseau.rb`
-    *   Description : Analyse les ports ouverts, les connexions suspectes et la configuration réseau.
-    *   Usage : `./audit_reseau.rb`
+### 📂 P4_diagnostic_système_avancés
+*Focus : Monitoring temps réel et charge.*
 
-2.  **Simulation de Latence**
-    *   Fichier : `latence_eleve.rb`
-    *   Description : Ajoute 500ms de latence sur l'interface réseau via `netem`.
-    *   Usage : `sudo ./latence_eleve.rb start` (Activer) / `sudo ./latence_eleve.rb stop` (Désactiver)
+- **`tableau_de_bord.sh`** : Dashboard complet générant un rapport HTML (ou texte) avec l'état CPU, RAM, Disque, I/O et les logs noyau critiques. Vérifie ses dépendances au lancement.
+- **`simulation_charge.sh`** : Outil de stress-test générant simultanément de la charge CPU, Disque et Mémoire pour valider la réactivité du tableau de bord.
+- **`rapport_diagnostic_synthese.md`** : Documentation technique du tableau de bord et du stress-test.
 
-3.  **Simulation de Pare-Feu Bloquant**
-    *   Fichier : `scenario_parefeu.rb`
-    *   Description : Bloque le port 80 (HTTP) via `iptables`.
-    *   Usage : `sudo ./scenario_parefeu.rb start` (Bloquer) / `sudo ./scenario_parefeu.rb stop` (Débloquer)
+### 📂 P5_automatisation_conteneurisation
+*Focus : Unification et déploiement.*
 
-4.  **Simulation de Panne DNS**
-    *   Fichier : `scenario_dns_casse.rb`
-    *   Description : Simule une panne DNS en modifiant `/etc/resolv.conf`.
-    *   Usage : `sudo ./scenario_dns_casse.rb start` (Casser) / `sudo ./scenario_dns_casse.rb stop` (Réparer)
+- **`orchestrateur.rb`** : Interface centrale (CLI) permettant de lancer n'importe quel outil des parties P1 à P4 depuis un menu unique. Agrège aussi les résultats.
+- **`Dockerfile`** : Recette pour construire une image Docker autonome contenant tout l'environnement et les outils du projet, prête à être déployée sur n'importe quel serveur Linux.
+- **`rapport_automatisation.md`** : Documentation finale sur l'architecture de l'orchestrateur et la stratégie de conteneurisation.
 
-### Documentation
-Voir `diagnostique_reseau/diagnostic_guide.md` pour le guide complet de diagnostic.
+---
+*Projet réalisé dans le cadre de la SAE 3. Tous les scripts respectent les conventions de nommage et de formatage harmonisées.*

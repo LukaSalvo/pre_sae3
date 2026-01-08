@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Diagnostic Système</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f4f4f9; color: #333; }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #2980b9; margin-top: 30px; border-left: 5px solid #3498db; padding-left: 10px; }
+        .timestamp { color: #7f8c8d; font-size: 0.9em; margin-bottom: 20px; }
+        pre { background-color: #2d3436; color: #dfe6e9; padding: 15px; border-radius: 5px; overflow-x: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .alert { color: #e74c3c; font-weight: bold; }
+        .section { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Tableau de Bord Diagnostic Système</h1>
+    <div class="timestamp">Généré le : jeu. 08 janv. 2026 21:08:43 CET sur AminoPcPort</div>
+    <div class="timestamp">Kernel : 6.12.57+deb13-amd64 | Uptime : up 1 hour, 3 minutes</div>
+<div class='section'><h2>Utilisation CPU (mpstat)</h2><pre>Linux 6.12.57+deb13-amd64 (AminoPcPort) 	08/01/2026 	_x86_64_	(12 CPU)
+
+21:08:43     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+21:08:44     all    0,33    0,00    0,08    0,00    0,00    0,00    0,00    0,00    0,00   99,58
+21:08:44       0    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+21:08:44       1    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+21:08:44       2    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+21:08:44       3    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+21:08:44       4    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+21:08:44       5    1,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00   99,00
+21:08:44       6    1,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00   99,00
+21:08:44       7    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+21:08:44       8    1,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00   99,00
+21:08:44       9    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+21:08:44      10    1,00    0,00    1,00    0,00    0,00    0,00    0,00    0,00    0,00   98,00
+21:08:44      11    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+
+Moyenne :  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+Moyenne :  all    0,33    0,00    0,08    0,00    0,00    0,00    0,00    0,00    0,00   99,58
+Moyenne :    0    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+Moyenne :    1    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+Moyenne :    2    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+Moyenne :    3    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+Moyenne :    4    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+Moyenne :    5    1,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00   99,00
+Moyenne :    6    1,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00   99,00
+Moyenne :    7    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+Moyenne :    8    1,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00   99,00
+Moyenne :    9    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00
+Moyenne :   10    1,00    0,00    1,00    0,00    0,00    0,00    0,00    0,00    0,00   98,00
+Moyenne :   11    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00  100,00</pre></div>
+<div class='section'><h2>Activité Mémoire & Swap (vmstat)</h2><pre>--procs-- -----------------------mémoire--------------------- -échange- -----io---- -système- ----------cpu----------
+   r    b         swpd        libre       tampon        cache   si   so    bi    bo   in   cs  us  sy  id  wa  st  gu
+   1    0            0         7313          125         2522    0    0   611   187 5503    7   1   1  98   0   0   0
+   0    0            0         7306          125         2522    0    0     0  4044 2972 3751   2   1  97   0   0   0
+   0    0            0         7311          125         2522    0    0     0     0 2036 2958   0   0 100   0   0   0
+   0    0            0         7316          125         2522    0    0     0     0 2005 2846   0   0  99   0   0   0
+   0    0            0         7325          125         2522    0    0     0     0 2152 3070   0   0 100   0   0   0</pre></div>
+<div class='section'><h2>Statistiques E/S Disque (iostat)</h2><pre>Linux 6.12.57+deb13-amd64 (AminoPcPort) 	08/01/2026 	_x86_64_	(12 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1,20    0,00    0,65    0,04    0,00   98,11
+
+Device            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util
+nvme0n1         16,18    611,34     4,95  23,41    0,18    37,77    8,71    188,87     9,76  52,85    1,53    21,69    0,00      0,00     0,00   0,00    0,00     0,00    0,82    1,36    0,02   0,44
+
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0,33    0,00    0,17    0,00    0,00   99,50
+
+Device            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util
+nvme0n1          0,00      0,00     0,00   0,00    0,00     0,00   14,00    108,00     1,00   6,67    0,29     7,71    0,00      0,00     0,00   0,00    0,00     0,00    1,00    3,00    0,01   0,00
+
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           2,08    0,00    0,67    0,00    0,00   97,25
+
+Device            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util</pre></div>
+<div class='section'><h2>Top Processus Consommateurs d'I/O (iotop)</h2><pre>Total DISK READ:         0.00 B/s | Total DISK WRITE:         0.00 B/s
+Current DISK READ:       0.00 B/s | Current DISK WRITE:       0.00 B/s
+    TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN      IO    COMMAND
+Total DISK READ:         0.00 B/s | Total DISK WRITE:         7.82 K/s
+Current DISK READ:       0.00 B/s | Current DISK WRITE:       7.82 K/s
+    TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN      IO    COMMAND
+   6616 be/4 aminobel    0.00 B/s    7.82 K/s ?unavailable?  firefox-esr [glean.dispatche]
+Total DISK READ:         0.00 B/s | Total DISK WRITE:         0.00 B/s
+Current DISK READ:       0.00 B/s | Current DISK WRITE:       0.00 B/s
+    TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN      IO    COMMAND</pre></div>
+<div class='section'><h2>Historique Charge Système (sar -q)</h2><pre></pre></div>
+<div class='section'><h2>Historique Mémoire (sar -r)</h2><pre></pre></div>
+<div class='section'><h2>Alertes Noyau (dmesg)</h2><pre>[    0.279068] ACPI BIOS Error (bug): Could not resolve symbol [\_SB.PCI0.GP18.SATA], AE_NOT_FOUND (20240827/dswload2-162)
+[    0.279080] ACPI Error: AE_NOT_FOUND, During name lookup/catalog (20240827/psobject-220)
+[    0.281627] ACPI BIOS Error (bug): Could not resolve symbol [\_SB.PCI0.PB2], AE_NOT_FOUND (20240827/dswload2-162)
+[    0.281636] ACPI Error: AE_NOT_FOUND, During name lookup/catalog (20240827/psobject-220)
+[    0.694017] tpm tpm0: tpm_read_log_acpi: Failed to map ACPI memory
+[    0.803674] RAS: Correctable Errors collector initialized.
+[    1.576398] ucsi_acpi USBC000:00: unknown error 0
+[    1.576450] ucsi_acpi USBC000:00: UCSI_GET_PDOS failed (-5)
+[    1.684407] ucsi_acpi USBC000:00: unknown error 0
+[    1.684474] ucsi_acpi USBC000:00: UCSI_GET_PDOS failed (-5)
+[    1.723648] ACPI Warning: \_SB.PCI0.GP17.XHC0.RHUB.PRT1._UPC: Return Package is too small - found 1 elements, expected 4 (20240827/nsprepkg-362)
+[    9.936301] nouveau 0000:01:00.0: fifo:000000:0004:0020:[gst-plugin-scan[1867]] errored - disabling channel
+[   10.021833] nouveau 0000:01:00.0: fifo:000000:0002:0010:[gst-plugin-scan[1867]] errored - disabling channel
+[   10.106463] nouveau 0000:01:00.0: fifo:000000:0002:0010:[gst-plugin-scan[1867]] errored - disabling channel
+[  147.712337] warning: `Socket Thread' uses wireless extensions which will stop working for Wi-Fi 7 hardware; use nl80211</pre></div>
+<div class='section'><h2>Analyse du Démarrage (systemd-analyze)</h2><pre>Startup finished in 5.792s (firmware) + 8.121s (loader) + 5.901s (kernel) + 5.293s (userspace) = 25.109s 
+graphical.target reached after 5.293s in userspace.
+
+3.216s docker.service
+2.597s plymouth-quit-wait.service
+ 750ms fwupd.service
+ 549ms rtkit-daemon.service
+ 275ms dev-nvme0n1p6.device
+ 234ms upower.service
+ 177ms exim4.service
+ 175ms user@1000.service
+ 150ms systemd-udev-trigger.service
+ 141ms containerd.service</pre></div>
+</body></html>

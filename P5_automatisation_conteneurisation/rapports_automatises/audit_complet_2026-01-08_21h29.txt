@@ -1,0 +1,25 @@
+RAPPORT D'AUDIT GLOBAL SAE 3
+Date : 2026-01-08 21:29:50 +0100
+Date : 2026-01-08 21:29:50 +0100
+
+>>> MODULE : Analyse Processus (CPU/Mem en Ruby)
+
+
+[STDERR] :
+ruby: No such file or directory -- /home/aminobela/pre_sae3/P5_automatisation_conteneurisation/../analyse_processeur_performance/rapport_analyse.rb (LoadError)
+
+
+>>> MODULE : Audit Réseau Automatisé (Ruby)
+
+
+[STDERR] :
+ruby: No such file or directory -- /home/aminobela/pre_sae3/P5_automatisation_conteneurisation/../diagnostique_reseau/audit_reseau.rb (LoadError)
+
+
+>>> MODULE : Tableau de Bord Système (Bash)
+
+
+[STDERR] :
+bash: /home/aminobela/pre_sae3/P5_automatisation_conteneurisation/../diagnostic_système_avancés/tableau_de_bord.sh: Aucun fichier ou dossier de ce nom
+
+
