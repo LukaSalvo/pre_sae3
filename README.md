@@ -44,5 +44,3 @@ Ce projet regroupe une suite d'outils et d'analyses pour le diagnostic système,
 - **`Dockerfile`** : Recette pour construire une image Docker autonome contenant tout l'environnement et les outils du projet, prête à être déployée sur n'importe quel serveur Linux.
 - **`rapport_automatisation.md`** : Documentation finale sur l'architecture de l'orchestrateur et la stratégie de conteneurisation.
 
----
-*Projet réalisé dans le cadre de la SAE 3. Tous les scripts respectent les conventions de nommage et de formatage harmonisées.*
