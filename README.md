@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 # Synthèse du projet - SAE 3 : Analyse forensique et débogage
+=======
+# SAE 3 - Analyse forensique et débogage système
+>>>>>>> 5452e29eea9ad4cde7c5af562a365e6530d48ca7
 
 Ce projet regroupe une suite d'outils et d'analyses pour le diagnostic système, réseau et forensique sous Linux. Il est structuré en 5 parties distinctes, allant de l'analyse bas niveau à l'automatisation complète via Docker.
 
+<<<<<<< HEAD
 ## Structure globale
 
 ### 📂 P1_analyse_processeur_performance
@@ -46,3 +51,9 @@ Ce projet regroupe une suite d'outils et d'analyses pour le diagnostic système,
 
 ---
 *Projet réalisé dans le cadre de la SAE 3. Tous les scripts respectent les conventions de nommage et de formatage harmonisées.*
+=======
+## Structure du projet
+
+- `analyse_processeur_performance/` : Partie 1 (Analyse processus et performances)
+- `diagnostique_reseau/` : Partie 2 (Diagnostic réseau)
+>>>>>>> 5452e29eea9ad4cde7c5af562a365e6530d48ca7
