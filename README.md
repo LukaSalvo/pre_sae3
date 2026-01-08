@@ -1,15 +1,19 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Synthèse du projet - SAE 3 : Analyse forensique et débogage
 =======
 # SAE 3 - Analyse forensique et débogage système
 >>>>>>> 5452e29eea9ad4cde7c5af562a365e6530d48ca7
+=======
+SAE 3 : Analyse forensique et débogage
+>>>>>>> acd6634ac8862ff6986210307f0b3c04ec21c1e3
 
 Ce projet regroupe une suite d'outils et d'analyses pour le diagnostic système, réseau et forensique sous Linux. Il est structuré en 5 parties distinctes, allant de l'analyse bas niveau à l'automatisation complète via Docker.
 
 <<<<<<< HEAD
 ## Structure globale
 
-### 📂 P1_analyse_processeur_performance
+### P1_analyse_processeur_performance
 *Focus : Compréhension des processus et de l'usage CPU/RAM.*
 
 - **`boucle_infinie.rb`** : Script simulant une charge CPU bloquante (100% usage) pour tester les outils de monitoring (`top`, `htop`).
@@ -18,7 +22,7 @@ Ce projet regroupe une suite d'outils et d'analyses pour le diagnostic système,
 - **`rapport_analyse.rb`** : Outil en Ruby qui inspecte le système (`/proc`) pour sortir un rapport détaillé sur l'état des processus.
 - **`rapport_analyse_proc.md`** : Documentation méthodologique expliquant comment diagnostiquer ces anomalies manuellement.
 
-### 📂 P2_diagnostique_reseau
+### P2_diagnostique_reseau
 *Focus : Audit et dépannage de la connectivité réseau.*
 
 - **`audit_reseau.rb`** : Scanner automatisé qui liste les ports ouverts, détecte les connexions suspectes hors standards (Web/SSH) et affiche la config IP/Routes.
@@ -27,7 +31,7 @@ Ce projet regroupe une suite d'outils et d'analyses pour le diagnostic système,
 - **`scenario_dns_casse.rb`** : Modifie temporairement `/etc/resolv.conf` pour simuler une panne de résolution de noms.
 - **`rapport_diagnostic_guide.md`** : Guide complet des commandes (`ping`, `mtr`, `ss`, `dig`) pour résoudre ces incidents.
 
-### 📂 P3_diagnostic_log
+### P3_diagnostic_log
 *Focus : Investigation post-incident et analyse de logs.*
 
 - **`scenario_intrusion_ssh.sh`** : Génère des tentatives de connexion SSH échouées en masse pour "polluer" les logs d'authentification (`auth.log`).
@@ -35,20 +39,21 @@ Ce projet regroupe une suite d'outils et d'analyses pour le diagnostic système,
 - **`analyse_log.sh`** : Script Bash utilisant `grep`, `awk` et `journalctl` pour extraire automatiquement les traces suspectes (Auth failed, erreurs noyau).
 - **`rapport_investigation_forensique.md`** : Rapport type expliquant la méthodologie d'enquête sur les deux scénarios ci-dessus.
 
-### 📂 P4_diagnostic_système_avancés
+### P4_diagnostic_système_avancés
 *Focus : Monitoring temps réel et charge.*
 
 - **`tableau_de_bord.sh`** : Dashboard complet générant un rapport HTML (ou texte) avec l'état CPU, RAM, Disque, I/O et les logs noyau critiques. Vérifie ses dépendances au lancement.
 - **`simulation_charge.sh`** : Outil de stress-test générant simultanément de la charge CPU, Disque et Mémoire pour valider la réactivité du tableau de bord.
 - **`rapport_diagnostic_synthese.md`** : Documentation technique du tableau de bord et du stress-test.
-
-### 📂 P5_automatisation_conteneurisation
+- 
+### P5_automatisation_conteneurisation
 *Focus : Unification et déploiement.*
 
 - **`orchestrateur.rb`** : Interface centrale (CLI) permettant de lancer n'importe quel outil des parties P1 à P4 depuis un menu unique. Agrège aussi les résultats.
 - **`Dockerfile`** : Recette pour construire une image Docker autonome contenant tout l'environnement et les outils du projet, prête à être déployée sur n'importe quel serveur Linux.
 - **`rapport_automatisation.md`** : Documentation finale sur l'architecture de l'orchestrateur et la stratégie de conteneurisation.
 
+<<<<<<< HEAD
 ---
 *Projet réalisé dans le cadre de la SAE 3. Tous les scripts respectent les conventions de nommage et de formatage harmonisées.*
 =======
@@ -57,3 +62,5 @@ Ce projet regroupe une suite d'outils et d'analyses pour le diagnostic système,
 - `analyse_processeur_performance/` : Partie 1 (Analyse processus et performances)
 - `diagnostique_reseau/` : Partie 2 (Diagnostic réseau)
 >>>>>>> 5452e29eea9ad4cde7c5af562a365e6530d48ca7
+=======
+>>>>>>> acd6634ac8862ff6986210307f0b3c04ec21c1e3
