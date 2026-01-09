@@ -1,0 +1,133 @@
+<html>
+<head>
+<title>Dashboard diagnostic système</title>
+</head>
+<body>
+<h1>Tableau de bord diagnostic système</h1>
+<p>Généré le : ven. 09 janv. 2026 10:29:52 CET sur AminoPcPort<br>
+Kernel : 6.12.57+deb13-amd64 | Uptime : up 14 hours, 24 minutes</p>
+<hr>
+<h2>Utilisation CPU (mpstat)</h2>
+<pre>
+Linux 6.12.57+deb13-amd64 (AminoPcPort) 	09/01/2026 	_x86_64_	(12 CPU)
+
+10:29:52     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+10:29:53     all   86,81    0,00   13,19    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+10:29:53       0   95,00    0,00    5,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+10:29:53       1   95,00    0,00    5,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+10:29:53       2   95,00    0,00    5,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+10:29:53       3   96,00    0,00    4,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+10:29:53       4   97,00    0,00    3,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+10:29:53       5   94,00    0,00    6,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+10:29:53       6   92,08    0,00    7,92    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+10:29:53       7   91,92    0,00    8,08    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+10:29:53       8   95,96    0,00    4,04    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+10:29:53       9   94,00    0,00    6,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+10:29:53      10   66,67    0,00   33,33    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+10:29:53      11   29,00    0,00   71,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+
+Moyenne :  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+Moyenne :  all   86,81    0,00   13,19    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+Moyenne :    0   95,00    0,00    5,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+Moyenne :    1   95,00    0,00    5,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+Moyenne :    2   95,00    0,00    5,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+Moyenne :    3   96,00    0,00    4,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+Moyenne :    4   97,00    0,00    3,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+Moyenne :    5   94,00    0,00    6,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+Moyenne :    6   92,08    0,00    7,92    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+Moyenne :    7   91,92    0,00    8,08    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+Moyenne :    8   95,96    0,00    4,04    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+Moyenne :    9   94,00    0,00    6,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+Moyenne :   10   66,67    0,00   33,33    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+Moyenne :   11   29,00    0,00   71,00    0,00    0,00    0,00    0,00    0,00    0,00    0,00
+</pre>
+<h2>Activité mémoire & swap (vmstat)</h2>
+<pre>
+--procs-- -----------------------mémoire--------------------- -échange- -----io---- -système- ----------cpu----------
+   r    b         swpd        libre       tampon        cache   si   so    bi    bo   in   cs  us  sy  id  wa  st  gu
+  15    0            0         5563          141         2755    0    0    46    30  944    8   2   1  97   0   0   0
+  13    0            0         5567          141         2731    0    0     0   132 6940 5058  87  13   0   0   0   0
+  13    0            0         5578          141         2724    0    0     0     8 6932 4869  87  13   0   0   0   0
+  13    0            0         5583          141         2725    0    0     0     0 6968 4970  87  13   0   0   0   0
+  15    0            0         5608          141         2717    0    0     0   144 7084 5197  86  14   0   0   0   0
+</pre>
+<h2>Statistiques E/S disque (iostat)</h2>
+<pre>
+Linux 6.12.57+deb13-amd64 (AminoPcPort) 	09/01/2026 	_x86_64_	(12 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1,77    0,00    0,86    0,03    0,00   97,33
+
+Device            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util
+nvme0n1          1,25     46,87     0,37  22,61    0,19    37,45    1,30     30,12     1,33  50,56    1,67    23,23    0,00      0,00     0,00   0,00    0,00     0,00    0,10    1,28    0,00   0,05
+
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+          87,55    0,00   12,45    0,00    0,00    0,00
+
+Device            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util
+nvme0n1          0,00      0,00     0,00   0,00    0,00     0,00   17,00    128,00     0,00   0,00    3,94     7,53    0,00      0,00     0,00   0,00    0,00     0,00    0,00    0,00    0,07   0,00
+
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+          88,59    0,00   11,41    0,00    0,00    0,00
+
+Device            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util
+nvme0n1          0,00      0,00     0,00   0,00    0,00     0,00   41,00    244,00    17,00  29,31    0,51     5,95    0,00      0,00     0,00   0,00    0,00     0,00    3,00    1,00    0,02   0,80
+</pre>
+<h2>Top processus consommateurs d'I/O (iotop)</h2>
+<pre>
+Total DISK READ:         0.00 B/s | Total DISK WRITE:         0.00 B/s
+Current DISK READ:       0.00 B/s | Current DISK WRITE:       0.00 B/s
+    TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN      IO    COMMAND
+Total DISK READ:         0.00 B/s | Total DISK WRITE:         0.00 B/s
+Current DISK READ:       0.00 B/s | Current DISK WRITE:       0.00 B/s
+    TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN      IO    COMMAND
+Total DISK READ:         0.00 B/s | Total DISK WRITE:       242.73 K/s
+Current DISK READ:       0.00 B/s | Current DISK WRITE:       0.00 B/s
+    TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN      IO    COMMAND
+    455 be/4 root        0.00 B/s  242.73 K/s ?unavailable?  systemd-journald
+</pre>
+<h2>Historique charge système (sar -q)</h2>
+<pre>
+Linux 6.12.57+deb13-amd64 (AminoPcPort) 	09/01/2026 	_x86_64_	(12 CPU)
+</pre>
+<h2>Historique mémoire (sar -r)</h2>
+<pre>
+Linux 6.12.57+deb13-amd64 (AminoPcPort) 	09/01/2026 	_x86_64_	(12 CPU)
+</pre>
+<h2>Alertes noyau (dmesg)</h2>
+<pre>
+[    0.279068] ACPI BIOS Error (bug): Could not resolve symbol [\_SB.PCI0.GP18.SATA], AE_NOT_FOUND (20240827/dswload2-162)
+[    0.279080] ACPI Error: AE_NOT_FOUND, During name lookup/catalog (20240827/psobject-220)
+[    0.281627] ACPI BIOS Error (bug): Could not resolve symbol [\_SB.PCI0.PB2], AE_NOT_FOUND (20240827/dswload2-162)
+[    0.281636] ACPI Error: AE_NOT_FOUND, During name lookup/catalog (20240827/psobject-220)
+[    0.694017] tpm tpm0: tpm_read_log_acpi: Failed to map ACPI memory
+[    0.803674] RAS: Correctable Errors collector initialized.
+[    1.576398] ucsi_acpi USBC000:00: unknown error 0
+[    1.576450] ucsi_acpi USBC000:00: UCSI_GET_PDOS failed (-5)
+[    1.684407] ucsi_acpi USBC000:00: unknown error 0
+[    1.684474] ucsi_acpi USBC000:00: UCSI_GET_PDOS failed (-5)
+[    1.723648] ACPI Warning: \_SB.PCI0.GP17.XHC0.RHUB.PRT1._UPC: Return Package is too small - found 1 elements, expected 4 (20240827/nsprepkg-362)
+[    9.936301] nouveau 0000:01:00.0: fifo:000000:0004:0020:[gst-plugin-scan[1867]] errored - disabling channel
+[   10.021833] nouveau 0000:01:00.0: fifo:000000:0002:0010:[gst-plugin-scan[1867]] errored - disabling channel
+[   10.106463] nouveau 0000:01:00.0: fifo:000000:0002:0010:[gst-plugin-scan[1867]] errored - disabling channel
+[  147.712337] warning: `Socket Thread' uses wireless extensions which will stop working for Wi-Fi 7 hardware; use nl80211
+</pre>
+<h2>Analyse du démarrage (systemd-analyze)</h2>
+<pre>
+Startup finished in 5.792s (firmware) + 8.121s (loader) + 5.901s (kernel) + 5.293s (userspace) = 25.109s 
+graphical.target reached after 5.293s in userspace.
+
+4.319s systemd-suspend.service
+3.216s docker.service
+2.597s plymouth-quit-wait.service
+ 750ms fwupd.service
+ 549ms rtkit-daemon.service
+ 275ms dev-nvme0n1p6.device
+ 234ms upower.service
+ 197ms dpkg-db-backup.service
+ 177ms exim4.service
+ 175ms user@1000.service
+</pre>
+</body></html>

@@ -51,24 +51,15 @@ fi
 start_report() {
     if [[ "$FORMAT" == "HTML" ]]; then
         cat <<EOF > "$FICHIER_RAPPORT"
-<!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard diagnostic système</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f4f4f9; color: #333; }
-        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        h2 { color: #2980b9; margin-top: 30px; border-left: 5px solid #3498db; padding-left: 10px; }
-        .timestamp { color: #7f8c8d; font-size: 0.9em; margin-bottom: 20px; }
-        pre { background-color: #2d3436; color: #dfe6e9; padding: 15px; border-radius: 5px; overflow-x: auto; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .alert { color: #e74c3c; font-weight: bold; }
-        .section { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px; }
-    </style>
+<title>Dashboard diagnostic système</title>
 </head>
 <body>
-    <h1>Tableau de bord diagnostic système</h1>
-    <div class="timestamp">Généré le : $(date) sur $(hostname)</div>
-    <div class="timestamp">Kernel : $(uname -r) | Uptime : $(uptime -p)</div>
+<h1>Tableau de bord diagnostic système</h1>
+<p>Généré le : $(date) sur $(hostname)<br>
+Kernel : $(uname -r) | Uptime : $(uptime -p)</p>
+<hr>
 EOF
     else
         echo "=== RAPPORT DIAGNOSTIC SYSTÈME ===" > "$FICHIER_RAPPORT"
@@ -85,7 +76,10 @@ add_section() {
     echo "Traitement : $title"
 
     if [[ "$FORMAT" == "HTML" ]]; then
-        echo "<div class='section'><h2>$title</h2><pre>$command_output</pre></div>" >> "$FICHIER_RAPPORT"
+        echo "<h2>$title</h2>" >> "$FICHIER_RAPPORT"
+        echo "<pre>" >> "$FICHIER_RAPPORT"
+        echo "$command_output" >> "$FICHIER_RAPPORT"
+        echo "</pre>" >> "$FICHIER_RAPPORT"
     else
         echo -e "\n\n>>> $title" >> "$FICHIER_RAPPORT"
         echo "$command_output" >> "$FICHIER_RAPPORT"
