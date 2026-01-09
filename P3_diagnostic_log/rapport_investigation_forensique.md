@@ -1,168 +1,95 @@
 # Analyse de logs et investigation post-incident
 
-Ce document présente deux scénarios d’incident système simulés ainsi que leur investigation forensique.
-Chaque scénario est reproductible à l’aide de scripts Bash et analysé à partir des journaux système Linux.
+Ce document présente l'analyse forensique de deux incidents simulés : une tentative d'intrusion SSH et une saturation disque.
 
 ---
 
-## Scénario 1 : Tentative d’intrusion SSH
+## Scénario 1 : Tentative d’intrusion SSH (Brute-force)
 
-### Contexte
+### 1. Contexte
+Une série de tentatives de connexion SSH échouées a été détectée sur le serveur. L'activité semble provenir d'une simulation locale visant à tester les capacités de détection du système.
+**Script utilisé :** `scenario_intrusion_ssh.sh`
 
-Une tentative d’intrusion est simulée par l’envoi de multiples connexions SSH échouées vers un compte utilisateur local.
-L’objectif est de générer des traces d’authentification afin de mener une analyse forensique réaliste.
+### 2. Méthodologie d’investigation
+L'investigation repose sur l'analyse des journaux du service SSH via `systemd`.
 
-Script utilisé :
-```bash
-scenario_intrusion_ssh.sh
-```
+**Commandes utilisées :**
+1.  **Recherche des échecs d'authentification :**
+    ```bash
+    sudo journalctl -u ssh | grep "Failed password"
+    ```
+2.  **Analyse temporelle (10 dernières minutes) :**
+    ```bash
+    sudo journalctl -u ssh --since "10 min ago"
+    ```
+3.  **Vérification des accès réussis (pour exclure une compromission) :**
+    ```bash
+    sudo journalctl -u ssh | grep "Accepted parent"
+    ```
 
----
+### 3. Découvertes
+- **Nature de l'attaque :** Attaque par dictionnaire (brute-force) simulée.
+- **Vecteur :** Connexions SSH sur le port 22.
+- **Cible :** L'utilisateur courant (`aminobela` ou variable `$USER`).
+- **Technique observée :** Utilisation de `SSH_ASKPASS` pour forcer l'envoi de mots de passe incorrects sans interaction utilisateur (automatisé par script).
+- **Résultat :** Au moins 10 tentatives échouées consécutives. Aucune intrusion réussie détectée durant cette fenêtre.
 
-### Méthodologie d’investigation
+### 4. Chronologie de l’incident
 
-Les tentatives d’authentification sont générées localement afin de produire des traces contrôlées et reproductibles.
+| Timestamp (Relatif) | Événement | Source |
+|-------------------|-----------|--------|
+| T0 | Début de l'exécution du script d'attaque | Shell |
+| T0 + 1s | Première tentative connexion échouée | `sshd[PID]: Failed password for...` |
+| T0 + 2s | Seconde tentative échouée | `sshd[PID]: Failed password...` |
+| ... | Répétition des échecs | |
+| T0 + 4s | Fin de l'attaque simulée | Shell |
 
-
-1. **Analyse des journaux d’authentification**
-```bash
-sudo grep "Failed password" /var/log/auth.log
-```
-
-2. **Analyse via systemd**
-```bash
-sudo journalctl -u ssh --since "10 min ago"
-```
-
-3. **Vérification des connexions utilisateurs**
-```bash
-last
-who
-w
-```
-
-4. **Extraction et corrélation des adresses IP**
-```bash
-sudo grep "Failed password" /var/log/auth.log | awk '{print $(NF-3)}'
-```
-
----
-
-### Découvertes
-
-- Présence de nombreuses tentatives SSH échouées
-- Ciblage répété du même compte utilisateur local 
-- Activité clairement identifiable dans les logs système
-- Aucune authentification réussie ni élévation de privilèges observée
+### 5. Recommandations
+- **Durcissement SSH :** Désactiver l'authentification par mot de passe (`PasswordAuthentication no`) au profit des clés publiques.
+- **Défense active :** Installer et configurer `Fail2ban` pour bannir les IP après 3-5 échecs.
+- **Surveillance :** Mettre en place une alerte centralisée sur les patterns "Failed password".
 
 ---
 
-### Chronologie de l’incident
+## Scénario 2 : Saturation disque (Déni de service)
 
-| Heure approximative | Événement |
-|--------------------|----------|
-| T0 | Lancement du script de simulation |
-| T0 + quelques secondes | Tentatives SSH échouées |
-| T0 + 1 minute | Fin des tentatives |
+### 1. Contexte
+Le système a montré des signes d'instabilité. Une investigation est menée pour identifier une potentielle saturation des ressources de stockage.
+**Script utilisé :** `scenario_saturation_disque.sh`
 
----
+### 2. Méthodologie d’investigation
+L'analyse se concentre sur l'espace disque et les erreurs d'écriture dans les journaux noyau et applicatifs.
 
-### Traces laissées
+**Commandes utilisées :**
+1.  **Vérification de l'occupation :**
+    ```bash
+    df -h
+    ```
+2.  **Recherche d'erreurs d'I/O dans le journal système :**
+    ```bash
+    sudo journalctl | grep -iE "no space|disk|write error"
+    ```
+3.  **Inspection des messages noyau :**
+    ```bash
+    dmesg | tail -n 50
+    ```
 
-- `/var/log/auth.log`
-- Journaux systemd du service SSH
-- Historique des connexions utilisateurs
+### 3. Découvertes
+- **Source du problème :** Un fichier volumineux `fill.bin` a été créé rapidement dans `/tmp/diskfill_demo`.
+- **Impact :** Le système de fichiers hôte (ou la partition `/tmp`) a atteint un seuil critique d'occupation.
+- **Conséquences :** Des écritures applicatives simulées (`app.log`) ont échoué, générant des erreurs "No space left on device" ou des fichiers tronqués.
 
----
+### 4. Chronologie de l’incident
 
-### Recommandations
+| Timestamp (Relatif) | Événement | Détails |
+|-------------------|-----------|---------|
+| T0 | Création du répertoire temporaire | `/tmp/diskfill_demo` |
+| T0 + 1s | Lancement de `dd` | Écriture de blocs de zéros (`/dev/zero`) |
+| T0 + 5s | Remplissage progressif | Occupation disque en hausse rapide |
+| T0 + 10s | Saturation atteinte (simulée) | Erreurs d'écriture dans les logs applicatifs |
+| T0 + 15s | Fin de l'incident | Arrêt du script |
 
-- Désactiver l’authentification par mot de passe
-- Utiliser uniquement l’authentification par clé SSH
-- Mettre en place un mécanisme de bannissement automatique (Fail2ban)
-- Surveiller régulièrement les logs d’authentification
-
----
-
-## Scénario 2 : Saturation disque simulée
-
-### Contexte
-
-Une saturation volontaire de l’espace disque est simulée afin de provoquer des erreurs d’écriture.
-Ce scénario permet d’analyser les réactions du système et les traces laissées dans les journaux.
-
-Script utilisé :
-```bash
-scenario_saturation_disque.sh
-```
-
----
-
-### Méthodologie d’investigation
-
-Selon la taille du disque disponible, la saturation peut être partielle ou complète.
-
-
-1. **Vérification de l’espace disque**
-```bash
-df -h
-```
-
-2. **Analyse des messages noyau**
-```bash
-dmesg | tail -n 50
-```
-
-3. **Analyse des journaux systemd**
-```bash
-sudo journalctl --since "10 min ago" | grep -i "no space"
-```
-
-4. **Analyse des fichiers générés**
-```bash
-ls -lh /tmp/diskfill_demo
-```
-
----
-
-### Découvertes
-
-- Remplissage progressif de l’espace disque
-- Tentatives d’écriture pouvant échouer en cas de saturation
-- Apparition possible de messages système indiquant un manque d’espace disque
-- Risque de dysfonctionnement des services applicatifs
-
----
-
-### Chronologie de l’incident
-
-| Heure approximative | Événement |
-|--------------------|----------|
-| T0 | Lancement du script |
-| T0 + quelques secondes | Augmentation rapide de l’espace utilisé |
-| T0 + 1 minute | Erreurs d’écriture détectées |
-| T0 + 2 minutes | Fin de la simulation |
-
----
-
-### Traces laissées
-
-- Messages noyau (`dmesg`)
-- Journaux systemd
-- Fichiers temporaires volumineux
-
----
-
-### Recommandations
-
-- Mettre en place une surveillance de l’espace disque
-- Configurer des alertes de seuil critique
-- Nettoyer régulièrement les fichiers temporaires
-- Limiter la taille des logs applicatifs
-
----
-
-
-
-
-
+### 5. Recommandations
+- **Partitionnement :** Séparer `/var` et `/tmp` sur des partitions distinctes pour éviter qu'un log ou un fichier temporaire ne sature la racine `/`.
+- **Monitoring :** Configurer des alertes (Nagios/Zabbix) quand l'espace disque dépasse 90%.
+- **Quotas :** Mettre en place des quotas disques pour les utilisateurs ou les services critiques.
