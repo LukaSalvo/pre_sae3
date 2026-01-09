@@ -41,6 +41,9 @@ RUN chmod +x /app/P5_automatisation_conteneurisation/orchestrateur.rb \
     /app/P4_diagnostic_système_avancés/*.sh \
     /app/P3_diagnostic_log/*.sh
 
+# Declare a volume for retrieving reports
+VOLUME ["/app/P5_automatisation_conteneurisation/rapports_automatises"]
+
 # Définition de l'entrée par défaut
 # Lance l'orchestrateur au démarrage du conteneur
 ENTRYPOINT ["ruby", "/app/P5_automatisation_conteneurisation/orchestrateur.rb"]

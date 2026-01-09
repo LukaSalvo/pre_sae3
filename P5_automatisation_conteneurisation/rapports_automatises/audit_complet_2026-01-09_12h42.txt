@@ -1,11 +1,10 @@
 RAPPORT D'AUDIT GLOBAL SAE 3
-Date : 2026-01-09 11:12:36 +0100
-Date : 2026-01-09 11:12:36 +0100
+Date : 2026-01-09 12:42:07 +0000
 
 >>> MODULE : Analyse processus (CPU/Mem en Ruby)
 ================================================================================
 RAPPORT D'ANALYSE DE PROCESSUS
-Généré le: 2026-01-09 11:12:36 +0100
+Généré le: 2026-01-09 12:42:07 +0000
 ================================================================================
 
 Top 10 des processus consommateurs de ressources:
@@ -13,37 +12,37 @@ Top 10 des processus consommateurs de ressources:
 === Par CPU ===
 PID      NOM                  ÉTAT   CPU%     MEM(MB)    THREADS 
 --------------------------------------------------------------------------------
-21048    ruby                 R      100.00   19.79      2       
-21040    ruby                 S      1.05     19.51      5       
-17305    firefox-esr          S      0.97     468.30     118     
-2746     gnome-shell          S      0.67     288.48     34      
-5791     antigravity          S      0.61     568.14     21      
-6016     language_server      S      0.36     343.64     14      
-5743     antigravity          S      0.11     172.22     26      
-2939     jetbrains-toolb      S      0.11     527.04     47      
-18080    gnome-terminal-      S      0.08     52.71      6       
-5868     antigravity          S      0.08     227.65     18      
+29808    ruby                 R      90.00    17.53      1       
+29777    ruby                 S      3.21     16.79      4       
+5791     antigravity          S      1.08     580.57     22      
+2746     gnome-shell          S      0.82     295.00     34      
+17305    firefox-esr          S      0.69     538.65     117     
+6016     language_server      S      0.51     357.20     14      
+29754    containerd-shim      S      0.45     11.30      10      
+29718    docker               S      0.44     29.22      11      
+5743     antigravity          S      0.31     175.96     26      
+23748    gnome-text-edit      S      0.21     173.15     21      
 
-=== Par Mémoire ===
+=== Par mémoire ===
 PID      NOM                  ÉTAT   CPU%     MEM(MB)    THREADS 
 --------------------------------------------------------------------------------
-5791     antigravity          S      0.61     568.14     21      
-2939     jetbrains-toolb      S      0.11     527.04     47      
-17305    firefox-esr          S      0.97     468.30     118     
-6016     language_server      S      0.36     343.64     14      
-2746     gnome-shell          S      0.67     288.48     34      
-1068     grafana              S      0.06     259.75     17      
-5690     antigravity          S      0.06     233.16     40      
-5868     antigravity          S      0.08     227.65     18      
-2958     gnome-software       S      0.02     211.30     8       
-17612    Isolated Web Co      S      0.00     197.52     28      
+5791     antigravity          S      1.08     580.57     22      
+17305    firefox-esr          S      0.69     538.65     117     
+2939     jetbrains-toolb      S      0.14     520.18     47      
+6016     language_server      S      0.51     357.20     14      
+2746     gnome-shell          S      0.82     295.00     34      
+1068     grafana              S      0.08     259.73     17      
+17718    Isolated Web Co      S      0.00     256.84     28      
+5690     antigravity          S      0.09     240.40     40      
+2958     gnome-software       S      0.02     215.45     8       
+5868     antigravity          S      0.11     212.52     18      
 
 ================================================================================
 
 
 >>> MODULE : Audit réseau automatisé (Ruby)
 Audit réseau automatisé (Ruby)
-Date: 2026-01-09 11:12:36 +0100
+Date: 2026-01-09 12:42:08 +0000
 
 1. Services exposés (Ports en écoute)
 Netid State  Recv-Q Send-Q                    Local Address:Port  Peer Address:PortProcess                                                                                                                                                                                                                                                                                                                         
@@ -69,34 +68,33 @@ tcp   LISTEN 0      4096                                  *:7946             *:*
 ...
 
 2. Connexions suspectes (établies)
-udp   0      960    [2001:660:4503:4242:2255:b35:4369:c0fe]:51015 [2001:660:4503:2727::27]:53   
-udp   0      960    [2001:660:4503:4242:2255:b35:4369:c0fe]:48710 [2001:660:4503:2727::27]:53   
-tcp   0      0                                    127.0.0.1:38085                127.0.0.1:34102
-tcp   0      0                                    127.0.0.1:39570                127.0.0.1:33241
-tcp   0      0                                    127.0.0.1:38085                127.0.0.1:38744
-tcp   0      0                                    127.0.0.1:38085                127.0.0.1:34090
-tcp   0      0                                    127.0.0.1:38754                127.0.0.1:38085
-tcp   0      0                                    127.0.0.1:34090                127.0.0.1:38085
-tcp   0      0                                    127.0.0.1:33241                127.0.0.1:39570
-tcp   0      0                                    127.0.0.1:38085                127.0.0.1:54800
-tcp   0      0                                    127.0.0.1:34102                127.0.0.1:38085
-tcp   0      0                                    127.0.0.1:41779                127.0.0.1:37982
-tcp   0      0                                    127.0.0.1:37982                127.0.0.1:41779
-tcp   0      0                                    127.0.0.1:38744                127.0.0.1:38085
-tcp   0      0                                    127.0.0.1:41779                127.0.0.1:33894
-tcp   0      0                                    127.0.0.1:38085                127.0.0.1:38754
-tcp   0      0                                    127.0.0.1:54800                127.0.0.1:38085
-tcp   0      0                                    127.0.0.1:33894                127.0.0.1:41779
+udp   0      0                             10.13.71.72%wlo1:68                                 172.27.253.1:67   
+tcp   0      0                                    127.0.0.1:41779                                 127.0.0.1:57896
+tcp   0      0                                    127.0.0.1:38085                                 127.0.0.1:34102
+tcp   0      0                                    127.0.0.1:39570                                 127.0.0.1:33241
+tcp   0      0                                    127.0.0.1:38085                                 127.0.0.1:38744
+tcp   0      0                                    127.0.0.1:38085                                 127.0.0.1:34090
+tcp   0      0                                    127.0.0.1:38754                                 127.0.0.1:38085
+tcp   0      0                                    127.0.0.1:34090                                 127.0.0.1:38085
+tcp   0      0                                    127.0.0.1:33241                                 127.0.0.1:39570
+tcp   0      0                                    127.0.0.1:38085                                 127.0.0.1:54800
+tcp   0      0                                    127.0.0.1:34102                                 127.0.0.1:38085
+tcp   0      0                                    127.0.0.1:38744                                 127.0.0.1:38085
+tcp   0      0                                    127.0.0.1:41779                                 127.0.0.1:33894
+tcp   0      0                                    127.0.0.1:38085                                 127.0.0.1:38754
+tcp   0      0                                    127.0.0.1:54800                                 127.0.0.1:38085
+tcp   0      0                                    127.0.0.1:57896                                 127.0.0.1:41779
+tcp   0      0                                    127.0.0.1:33894                                 127.0.0.1:41779
 
 3. Configuration réseau
 Interfaces :
 lo               UNKNOWN        127.0.0.1/8 ::1/128 
-wlo1             DORMANT        10.13.71.72/17 2001:660:4503:4242:2255:b35:4369:c0fe/64 fe80::4b7e:ba2d:826b:18b7/64 
+wlo1             UP             10.13.71.72/17 2001:660:4503:4242:2255:b35:4369:c0fe/64 fe80::4b7e:ba2d:826b:18b7/64 
 br-084a9193e61c  DOWN           172.18.0.1/16 
 br-56c96b6793e9  DOWN           172.80.0.1/16 
 br-68a6975e5316  DOWN           172.25.0.1/16 
 br-6a36421c62f4  DOWN           172.70.0.1/16 
-docker0          DOWN           172.17.0.1/16 
+docker0          DOWN           172.17.0.1/16 fe80::b002:77ff:feb4:2857/64 
 
 Table de routage :
 default via 10.13.127.254 dev wlo1 proto dhcp src 10.13.71.72 metric 600 
@@ -123,6 +121,12 @@ Traitement : Historique charge système (sar -q)
 Traitement : Historique mémoire (sar -r)
 Traitement : Alertes noyau (dmesg)
 Traitement : Analyse du démarrage (systemd-analyze)
-Rapport HTML généré : rapports/dashboard_2026-01-09_11h12.html
+Rapport HTML généré : ./dashboard_2026-01-09_12h42.html
+
+[STDERR] :
+System has not been booted with systemd as init system (PID 1). Can't operate.
+Failed to connect to system scope bus via local transport: Host is down
+System has not been booted with systemd as init system (PID 1). Can't operate.
+Failed to connect to system scope bus via local transport: Host is down
 
 

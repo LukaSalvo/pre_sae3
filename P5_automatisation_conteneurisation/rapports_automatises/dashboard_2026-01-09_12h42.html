@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>Dashboard diagnostic système</title>
+</head>
+<body>
+<h1>Tableau de bord diagnostic système</h1>
+<p>Généré le : Fri Jan  9 12:42:08 UTC 2026 sur AminoPcPort<br>
+Kernel : 6.12.57+deb13-amd64 | Uptime : up 17 hours, 36 minutes</p>
+<hr>
+<h2>Utilisation CPU (mpstat)</h2>
+<pre>
+Linux 6.12.57+deb13-amd64 (AminoPcPort) 	01/09/26 	_x86_64_	(12 CPU)
+
+12:42:08     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+12:42:09     all    0.67    0.00    0.17    0.08    0.00    0.00    0.00    0.00    0.00   99.08
+12:42:09       0    0.99    0.00    0.99    0.00    0.00    0.00    0.00    0.00    0.00   98.02
+12:42:09       1    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+12:42:09       2    1.02    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   98.98
+12:42:09       3    1.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   99.00
+12:42:09       4    2.02    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   97.98
+12:42:09       5    1.01    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   98.99
+12:42:09       6    0.00    0.00    1.00    0.00    0.00    0.00    0.00    0.00    0.00   99.00
+12:42:09       7    0.00    0.00    0.00    1.01    0.00    0.00    0.00    0.00    0.00   98.99
+12:42:09       8    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+12:42:09       9    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+12:42:09      10    2.04    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   97.96
+12:42:09      11    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+
+Average:     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+Average:     all    0.67    0.00    0.17    0.08    0.00    0.00    0.00    0.00    0.00   99.08
+Average:       0    0.99    0.00    0.99    0.00    0.00    0.00    0.00    0.00    0.00   98.02
+Average:       1    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+Average:       2    1.02    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   98.98
+Average:       3    1.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   99.00
+Average:       4    2.02    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   97.98
+Average:       5    1.01    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   98.99
+Average:       6    0.00    0.00    1.00    0.00    0.00    0.00    0.00    0.00    0.00   99.00
+Average:       7    0.00    0.00    0.00    1.01    0.00    0.00    0.00    0.00    0.00   98.99
+Average:       8    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+Average:       9    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+Average:      10    2.04    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00   97.96
+Average:      11    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+</pre>
+<h2>Activité mémoire & swap (vmstat)</h2>
+<pre>
+--procs-- -----------------------memory---------------------- ---swap-- -----io---- -system-- ----------cpu----------
+   r    b         swpd         free         buff        cache   si   so    bi    bo   in   cs  us  sy  id  wa  st  gu
+   0    0            0         4757          191         3389    0    0    43    48 1183    5   2   1  98   0   0   0
+   0    0            0         4764          191         3388    0    0     0     0 2360 3175   1   0  99   0   0   0
+   0    0            0         4779          191         3388    0    0     0   236 6359 7463   2   1  97   0   0   0
+   0    0            0         4787          191         3388    0    0     0     0 9375 10445   2   2  96   0   0   0
+   0    0            0         4802          191         3388    0    0     0     4 7312 8158   2   1  97   0   0   0
+</pre>
+<h2>Statistiques E/S disque (iostat)</h2>
+<pre>
+Linux 6.12.57+deb13-amd64 (AminoPcPort) 	01/09/26 	_x86_64_	(12 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1.65    0.00    0.75    0.02    0.00   97.57
+
+Device            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util
+nvme0n1          1.09     43.76     0.30  21.80    0.20    40.29    2.11     48.81     2.05  49.31    2.36    23.13    0.00      0.00     0.00   0.00    0.00     0.00    0.20    0.92    0.01   0.07
+
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.84    0.00    0.67    0.00    0.00   98.50
+
+Device            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util
+nvme0n1          0.00      0.00     0.00   0.00    0.00     0.00    1.00     20.00     1.00  50.00    4.00    20.00    0.00      0.00     0.00   0.00    0.00     0.00    0.00    0.00    0.00   0.00
+
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           1.09    0.00    0.92    0.08    0.00   97.91
+
+Device            r/s     rkB/s   rrqm/s  %rrqm r_await rareq-sz     w/s     wkB/s   wrqm/s  %wrqm w_await wareq-sz     d/s     dkB/s   drqm/s  %drqm d_await dareq-sz     f/s f_await  aqu-sz  %util
+nvme0n1          0.00      0.00     0.00   0.00    0.00     0.00    9.00    200.00    35.00  79.55    1.56    22.22    0.00      0.00     0.00   0.00    0.00     0.00    4.00    1.25    0.02   0.80
+</pre>
+<h2>Top processus consommateurs d'I/O (iotop)</h2>
+<pre>
+Total DISK READ:         0.00 B/s | Total DISK WRITE:         0.00 B/s
+Current DISK READ:       0.00 B/s | Current DISK WRITE:       0.00 B/s
+    TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN      IO    COMMAND
+Total DISK READ:         0.00 B/s | Total DISK WRITE:         0.00 B/s
+Current DISK READ:       0.00 B/s | Current DISK WRITE:     143.31 K/s
+    TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN      IO    COMMAND
+Total DISK READ:         0.00 B/s | Total DISK WRITE:         0.00 B/s
+Current DISK READ:       0.00 B/s | Current DISK WRITE:       0.00 B/s
+    TID  PRIO  USER     DISK READ  DISK WRITE  SWAPIN      IO    COMMAND
+</pre>
+<h2>Historique charge système (sar -q)</h2>
+<pre>
+Historique indisponible. Capture de données en temps réel (5 sec)...
+Linux 6.12.57+deb13-amd64 (AminoPcPort) 	01/09/26 	_x86_64_	(12 CPU)
+
+12:42:17      runq-sz  plist-sz   ldavg-1   ldavg-5  ldavg-15   blocked
+12:42:18            0      1597      0.50      0.34      0.38         0
+12:42:19            1      1596      0.50      0.34      0.38         0
+12:42:20            0      1596      0.50      0.34      0.38         0
+12:42:21            1      1595      0.50      0.34      0.38         0
+12:42:22            1      1595      0.50      0.34      0.38         0
+Average:            1      1596      0.50      0.34      0.38         0
+</pre>
+<h2>Historique mémoire (sar -r)</h2>
+<pre>
+Historique indisponible. Capture de données en temps réel (5 sec)...
+Linux 6.12.57+deb13-amd64 (AminoPcPort) 	01/09/26 	_x86_64_	(12 CPU)
+
+12:42:22    kbmemfree   kbavail kbmemused  %memused kbbuffers  kbcached  kbcommit   %commit  kbactive   kbinact   kbdirty
+12:42:23      4907512   8134740   5408304     38.18    196532   3303452  17006520     94.12   5885780   1463844        52
+12:42:24      4906784   8134012   5409032     38.19    196532   3303452  17006520     94.12   5885904   1463844        52
+12:42:25      4906544   8133772   5409272     38.19    196532   3303452  17006520     94.12   5885904   1463844        52
+12:42:26      4907484   8134720   5408316     38.18    196544   3303452  17006520     94.12   5885724   1463852        76
+12:42:27      4908372   8135608   5407428     38.18    196544   3303452  17006588     94.12   5885280   1463852        76
+Average:      4907339   8134570   5408470     38.19    196537   3303452  17006534     94.12   5885718   1463847        62
+</pre>
+<h2>Alertes noyau (dmesg)</h2>
+<pre>
+[    0.279068] ACPI BIOS Error (bug): Could not resolve symbol [\_SB.PCI0.GP18.SATA], AE_NOT_FOUND (20240827/dswload2-162)
+[    0.279080] ACPI Error: AE_NOT_FOUND, During name lookup/catalog (20240827/psobject-220)
+[    0.281627] ACPI BIOS Error (bug): Could not resolve symbol [\_SB.PCI0.PB2], AE_NOT_FOUND (20240827/dswload2-162)
+[    0.281636] ACPI Error: AE_NOT_FOUND, During name lookup/catalog (20240827/psobject-220)
+[    0.694017] tpm tpm0: tpm_read_log_acpi: Failed to map ACPI memory
+[    0.803674] RAS: Correctable Errors collector initialized.
+[    1.576398] ucsi_acpi USBC000:00: unknown error 0
+[    1.576450] ucsi_acpi USBC000:00: UCSI_GET_PDOS failed (-5)
+[    1.684407] ucsi_acpi USBC000:00: unknown error 0
+[    1.684474] ucsi_acpi USBC000:00: UCSI_GET_PDOS failed (-5)
+[    1.723648] ACPI Warning: \_SB.PCI0.GP17.XHC0.RHUB.PRT1._UPC: Return Package is too small - found 1 elements, expected 4 (20240827/nsprepkg-362)
+[    9.936301] nouveau 0000:01:00.0: fifo:000000:0004:0020:[gst-plugin-scan[1867]] errored - disabling channel
+[   10.021833] nouveau 0000:01:00.0: fifo:000000:0002:0010:[gst-plugin-scan[1867]] errored - disabling channel
+[   10.106463] nouveau 0000:01:00.0: fifo:000000:0002:0010:[gst-plugin-scan[1867]] errored - disabling channel
+[  147.712337] warning: `Socket Thread' uses wireless extensions which will stop working for Wi-Fi 7 hardware; use nl80211
+</pre>
+<h2>Analyse du démarrage (systemd-analyze)</h2>
+<pre>
+
+</pre>
+</body></html>

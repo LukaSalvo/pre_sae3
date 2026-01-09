@@ -2,8 +2,8 @@
 
 # Configuration
 DATE_JOUR=$(date +%Y-%m-%d_%Hh%M)
-OUTPUT_DIR="rapports"
-mkdir -p "$OUTPUT_DIR"
+OUTPUT_DIR="."
+# mkdir -p "$OUTPUT_DIR" # Inutile si on est dans .
 
 # Mode par défaut : HTML
 FORMAT="HTML"

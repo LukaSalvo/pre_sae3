@@ -35,13 +35,15 @@ Le fichier `Dockerfile` permet de construire une image "clé en main" contenant 
 
 **Déploiement :**
 ```bash
-# Construction de l'image
-docker build -t sae3-diagnostic -f Dockerfile ..
+# Lancement simplifié
+Il suffit d'exécuter le script `start_docker.sh` situé dans le dossier P5 :
 
-# Lancement (avec privilèges pour l'accès matériel)
-docker run -it --rm --privileged --pid=host --net=host sae3-diagnostic
+```bash
+./P5_automatisation_conteneurisation/start_docker.sh
 ```
-*Note : Les flags `--privileged`, `--pid=host`, et `--net=host` sont cruciaux pour permettre aux outils de diagnostic à l'intérieur du conteneur de voir réellement l'état de la machine hôte.*
+
+Ce script s'occupe de tout (construction, volumes, privilèges).
+
 
 ## Conclusion du projet
 
