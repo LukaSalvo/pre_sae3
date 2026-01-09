@@ -13,31 +13,39 @@ class ProcessAnalyzer
 
   def analyze_all_processes
     processes = []
+    # COMMENTAIRE: On cherche uniquement les dossiers numériques dans /proc.
+    # Chaque dossier correspond à un PID actif sur le système Linux.
     Dir.glob('/proc/[0-9]*').each do |proc_dir|
       pid = File.basename(proc_dir).to_i
       begin
         process_info = analyze_process(pid)
         processes << process_info if process_info
       rescue => e
-
+        # Ignore les erreurs si le processus disparaît pendant l'analyse
       end
     end
     processes
   end
 
   def analyze_process(pid)
+    # COMMENTAIRE: Vérification critique. Le processus peut s'arrêter entre le 'glob' et l'analyse.
     return nil unless File.exist?("/proc/#{pid}")
+
+    # Lecture unique du fichier status pour éviter d'ouvrir le fichier plusieurs fois
+    # Cela améliore la performance et la cohérence des données (état, mémoire, threads).
+    status_content = File.read("/proc/#{pid}/status") rescue nil
+    return nil unless status_content
 
     info = {
       pid: pid,
       name: get_process_name(pid),
-      state: get_process_state(pid),
+      state: get_process_state(status_content),    # Refactorisé avec Regex
       cpu_percent: get_cpu_usage(pid),
-      memory_mb: get_memory_usage(pid),
+      memory_mb: get_memory_usage(status_content), # Refactorisé avec Regex
       open_files: get_open_files(pid),
       syscalls: get_recent_syscalls(pid),
       cmdline: get_cmdline(pid),
-      threads: get_thread_count(pid)
+      threads: get_thread_count(status_content)    # Refactorisé avec Regex
     }
     info
   rescue
@@ -59,6 +67,8 @@ class ProcessAnalyzer
       puts "Top 10 des processus consommateurs de ressources:"
       puts
       processes = analyze_all_processes
+      
+      # COMMENTAIRE: Tri décroissant (-p) pour avoir les plus gros consommateurs en premier
       top_cpu = processes.sort_by { |p| -p[:cpu_percent].to_f }.take(10)
       
       puts "=== Par CPU ==="
@@ -80,51 +90,62 @@ class ProcessAnalyzer
     "unknown"
   end
 
-  def get_process_state(pid)
-    status = File.read("/proc/#{pid}/status")
-    state_line = status.lines.find { |l| l.start_with?("State:") }
-    state_line ? state_line.split[1] : "?"
-  rescue
-    "?"
+  # REFACTORISÉ: Utilisation de Regex pour capturer l'état
+  # Le fichier status contient "State:	S (sleeping)"
+  def get_process_state(status_content)
+    # Regex: Cherche "State:", suivi d'espaces (\s+), capture un mot (\w)
+    if match = status_content.match(/^State:\s+(\w)/)
+      match[1] # Retourne la première capture (ex: "S", "R")
+    else
+      "?"
+    end
   end
 
   def get_cpu_usage(pid)
+    # COMMENTAIRE: /proc/[pid]/stat contient les métriques brutes du CPU sur une seule ligne.
     stat = File.read("/proc/#{pid}/stat").split
-    utime = stat[13].to_i
-    stime = stat[14].to_i
+    
+    # Indices spécifiques à la doc du kernel Linux (man 5 proc)
+    utime = stat[13].to_i # Temps utilisateur
+    stime = stat[14].to_i # Temps noyau (système)
     total_time = utime + stime
     
     uptime = File.read("/proc/uptime").split[0].to_f
-    hertz = 100.0 # CLK_TCK généralement 100
+    hertz = 100.0 # COMMENTAIRE: Fréquence d'horloge (Clock Ticks). 100Hz est standard mais peut varier.
     starttime = stat[21].to_i / hertz
     
     elapsed = uptime - starttime
+    
+    # Calcul: (Temps utilisé / Fréquence) / Temps écoulé depuis le lancement * 100
     cpu_percent = elapsed > 0 ? (total_time / hertz / elapsed * 100).round(2) : 0.0
     cpu_percent
   rescue
     0.0
   end
 
-  def get_memory_usage(pid)
-    status = File.read("/proc/#{pid}/status")
-    vmrss_line = status.lines.find { |l| l.start_with?("VmRSS:") }
-    if vmrss_line
-      kb = vmrss_line.split[1].to_i
-      (kb / 1024.0).round(2)
+  # REFACTORISÉ: Utilisation de Regex pour la mémoire
+  # Le fichier contient "VmRSS:     1234 kB"
+  def get_memory_usage(status_content)
+    # Regex: Cherche "VmRSS:", espaces, capture des chiffres (\d+), espaces, "kB" (insensible à la casse)
+    if match = status_content.match(/^VmRSS:\s+(\d+)\s+kB/i)
+      kb = match[1].to_i
+      (kb / 1024.0).round(2) # Conversion en MB
     else
       0.0
     end
-  rescue
-    0.0
   end
 
   def get_open_files(pid)
     files = []
+    # COMMENTAIRE: /proc/[pid]/fd/ contient des liens symboliques vers les fichiers ouverts.
+    # C'est ainsi que lsof fonctionne.
     Dir.glob("/proc/#{pid}/fd/*").each do |fd|
       begin
         target = File.readlink(fd)
+        # Filtre les sockets et pipes pour ne garder que les vrais fichiers
         files << target unless target.start_with?("pipe:", "socket:", "anon_inode:")
       rescue
+        # Les descripteurs de fichiers peuvent se fermer très vite
       end
     end
     files.take(5) 
@@ -133,24 +154,30 @@ class ProcessAnalyzer
   end
 
   def get_recent_syscalls(pid)
+    # Note: Pour avoir les vrais syscalls, il faudrait utiliser 'strace' ou eBPF.
+    # Ici c'est une liste statique placeholder.
     ["read", "write", "open", "close", "mmap"]
   rescue
     []
   end
 
   def get_cmdline(pid)
+    # COMMENTAIRE: cmdline sépare les arguments par des caractères nuls (\0).
+    # On les remplace par des espaces pour l'affichage.
     cmdline = File.read("/proc/#{pid}/cmdline").gsub("\0", " ").strip
     cmdline.empty? ? "[#{get_process_name(pid)}]" : cmdline
   rescue
     "unknown"
   end
 
-  def get_thread_count(pid)
-    status = File.read("/proc/#{pid}/status")
-    threads_line = status.lines.find { |l| l.start_with?("Threads:") }
-    threads_line ? threads_line.split[1].to_i : 1
-  rescue
-    1
+  # REFACTORISÉ: Utilisation de Regex pour le nombre de threads
+  def get_thread_count(status_content)
+    # Regex: Cherche "Threads:", espaces, capture des chiffres (\d+)
+    if match = status_content.match(/^Threads:\s+(\d+)/)
+      match[1].to_i
+    else
+      1
+    end
   end
 
   def display_process_info(info)
