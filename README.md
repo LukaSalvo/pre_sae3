@@ -1,13 +1,5 @@
 
-# Synthèse du projet - SAE 3 : Analyse forensique et débogage
-=======
 # SAE 3 - Analyse forensique et débogage système
-
-
-
-
-Ce projet regroupe une suite d'outils et d'analyses pour le diagnostic système, réseau et forensique sous Linux. Il est structuré en 5 parties distinctes, allant de l'analyse bas niveau à l'automatisation complète via Docker.
-
 
 ## Structure globale
 
@@ -50,12 +42,3 @@ Ce projet regroupe une suite d'outils et d'analyses pour le diagnostic système,
 - **`orchestrateur.rb`** : Interface centrale (CLI) permettant de lancer n'importe quel outil des parties P1 à P4 depuis un menu unique. Agrège aussi les résultats.
 - **`Dockerfile`** : Recette pour construire une image Docker autonome contenant tout l'environnement et les outils du projet, prête à être déployée sur n'importe quel serveur Linux.
 - **`rapport_automatisation.md`** : Documentation finale sur l'architecture de l'orchestrateur et la stratégie de conteneurisation.
-
----
-*Projet réalisé dans le cadre de la SAE 3. Tous les scripts respectent les conventions de nommage et de formatage harmonisées.*
-=======
-## Structure du projet
-
-- `analyse_processeur_performance/` : Partie 1 (Analyse processus et performances)
-- `diagnostique_reseau/` : Partie 2 (Diagnostic réseau)
-
